@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "npx serve@latest out",
+    "build": "next build && next export",
+    "start": "npx serve@latest out -p $PORT --single",
     "lint": "next lint",
-    "railway:build": "pnpm install --no-frozen-lockfile && next build",
-    "railway:start": "npx serve@latest out -p $PORT"
+    "railway:build": "pnpm install --no-frozen-lockfile && next build && next export",
+    "railway:start": "npx serve@latest out -p $PORT --single"
   },
   "dependencies": {
     "@capacitor-community/admob": "^7.0.3",
