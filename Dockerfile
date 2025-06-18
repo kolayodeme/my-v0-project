@@ -1,5 +1,5 @@
-# Use Node.js LTS
-FROM node:20-slim
+# Build stage
+FROM node:20-slim AS builder
 
 # Install pnpm
 RUN npm install -g pnpm
@@ -8,7 +8,9 @@ RUN npm install -g pnpm
 WORKDIR /app
 
 # Copy package files
-COPY package.json pnpm-lock.yaml ./
+COPY package.json ./
+COPY pnpm-lock.yaml ./
+COPY .npmrc ./
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile
@@ -19,8 +21,19 @@ COPY . .
 # Build the application
 RUN pnpm build
 
+# Production stage
+FROM node:20-slim AS runner
+
+# Install serve globally
+RUN npm install -g serve
+
+WORKDIR /app
+
+# Copy built assets from builder stage
+COPY --from=builder /app/out ./out
+
 # Expose port
 EXPOSE 8080
 
 # Start the application
-CMD ["pnpm", "start"] 
+CMD ["serve", "-p", "8080", "-s", "out", "--single", "--cors"] 

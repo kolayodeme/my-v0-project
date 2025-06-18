@@ -1,11 +1,43 @@
+# Version control
 .git
 .gitignore
+
+# Dependencies
 node_modules
+.pnpm-store
+
+# Next.js build output
 .next
 out
-README.md
+
+# Environment variables
 .env*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.DS_Store 
+pnpm-debug.log*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea
+.vscode
+*.swp
+*.swo
+
+# Test coverage
+coverage
+
+# Cache
+.cache
+.npm
+
+README.md 
