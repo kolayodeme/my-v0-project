@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "npx serve@latest out",
     "lint": "next lint",
-    "railway:build": "pnpm install --no-frozen-lockfile && next build"
+    "railway:build": "pnpm install --no-frozen-lockfile && next build",
+    "railway:start": "npx serve@latest out -p $PORT"
   },
   "dependencies": {
     "@capacitor-community/admob": "^7.0.3",
