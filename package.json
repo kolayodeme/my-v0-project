@@ -2,15 +2,13 @@
   "name": "my-v0-project",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": ">=20.0.0",
-    "pnpm": ">=8.0.0"
-  },
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
-    "start": "serve -s out -p ${PORT:-8080} --single --cors",
-    "lint": "next lint"
+    "build": "next build && next export -o out",
+    "start": "npx serve@latest out -p ${PORT:-8080} --single --cors --no-clipboard --no-compression",
+    "lint": "next lint",
+    "railway:build": "pnpm install --no-frozen-lockfile && next build",
+    "railway:start": "npx serve@latest out -p ${PORT:-8080} --single --cors"
   },
   "dependencies": {
     "@capacitor-community/admob": "^7.0.3",
