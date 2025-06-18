@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Football App</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <header class="top-bar">
+            <h1>Football App</h1>
+            <div class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <!-- Bu içerik JavaScript ile yüklenecek -->
+            <div class="loading-spinner" id="page-loader">
+                <div class="spinner"></div>
+                <p>Yükleniyor...</p>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="#home" class="nav-item active" data-page="home">
+                <i class="fas fa-home"></i>
+                <span>Ana Sayfa</span>
+            </a>
+            <a href="#live" class="nav-item" data-page="live">
+                <i class="fas fa-bolt"></i>
+                <span>Canlı</span>
+            </a>
+            <a href="#upcoming" class="nav-item" data-page="upcoming">
+                <i class="fas fa-calendar"></i>
+                <span>Yaklaşan</span>
+            </a>
+            <a href="#leagues" class="nav-item" data-page="leagues">
+                <i class="fas fa-trophy"></i>
+                <span>Ligler</span>
+            </a>
+            <a href="#profile" class="nav-item" data-page="profile">
+                <i class="fas fa-user"></i>
+                <span>Profil</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Sayfa İçerikleri -->
+    <template id="home-template">
+        <div class="page-content home-page">
+            <section class="section live-matches">
+                <div class="section-header">
+                    <h2>Canlı Maçlar</h2>
+                    <a href="#live" class="view-all">Tümünü Gör</a>
+                </div>
+                <div class="match-list" id="live-matches-container">
+                    <!-- Live matches will be loaded here -->
+                </div>
+            </section>
+
+            <section class="section upcoming-matches">
+                <div class="section-header">
+                    <h2>Yaklaşan Maçlar</h2>
+                    <a href="#upcoming" class="view-all">Tümünü Gör</a>
+                </div>
+                <div class="match-list" id="upcoming-matches-container">
+                    <!-- Upcoming matches will be loaded here -->
+                </div>
+            </section>
+
+            <section class="section leagues-section">
+                <div class="section-header">
+                    <h2>Popüler Ligler</h2>
+                    <a href="#leagues" class="view-all">Tümünü Gör</a>
+                </div>
+                <div class="league-list" id="leagues-container">
+                    <!-- Leagues will be loaded here -->
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <template id="live-template">
+        <div class="page-content live-page">
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">Tümü</button>
+                <button class="filter-btn" data-filter="important">Önemli</button>
+                <button class="filter-btn" data-filter="favorites">Favoriler</button>
+            </div>
+            <div class="match-list large" id="all-live-matches">
+                <!-- Live matches will be loaded here -->
+            </div>
+        </div>
+    </template>
+
+    <template id="upcoming-template">
+        <div class="page-content upcoming-page">
+            <div class="date-selector">
+                <button class="date-nav prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="date-display" id="selected-date">Bugün</div>
+                <button class="date-nav next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="match-list large" id="all-upcoming-matches">
+                <!-- Upcoming matches will be loaded here -->
+            </div>
+        </div>
+    </template>
+
+    <template id="leagues-template">
+        <div class="page-content leagues-page">
+            <div class="search-bar">
+                <input type="text" placeholder="Lig veya Ülke Ara..." id="league-search">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="leagues-grid" id="all-leagues">
+                <!-- Leagues will be loaded here -->
+            </div>
+        </div>
+    </template>
+
+    <template id="profile-template">
+        <div class="page-content profile-page">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <img src="images/placeholder-user.jpg" alt="User Avatar">
+                </div>
+                <h2 class="profile-name">Kullanıcı Adı</h2>
+                <p class="profile-credit">100 Kredi</p>
+            </div>
+
+            <div class="profile-menu">
+                <a href="#account" class="profile-menu-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Hesap Bilgileri</span>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+                <a href="#transactions" class="profile-menu-item">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>İşlemler</span>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+                <a href="#settings" class="profile-menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Ayarlar</span>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+                <a href="#logout" class="profile-menu-item logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Çıkış Yap</span>
+                </a>
+            </div>
+        </div>
+    </template>
+
+    <!-- Match Card Template -->
+    <template id="match-card-template">
+        <div class="match-card">
+            <div class="match-league">
+                <img src="" alt="" class="league-logo">
+                <span class="league-name"></span>
+            </div>
+            <div class="match-teams">
+                <div class="team home-team">
+                    <img src="" alt="" class="team-logo">
+                    <span class="team-name"></span>
+                </div>
+                <div class="match-score">
+                    <span class="home-score"></span>
+                    <span class="score-separator">-</span>
+                    <span class="away-score"></span>
+                </div>
+                <div class="team away-team">
+                    <img src="" alt="" class="team-logo">
+                    <span class="team-name"></span>
+                </div>
+            </div>
+            <div class="match-info">
+                <span class="match-time"></span>
+                <span class="match-status"></span>
+            </div>
+        </div>
+    </template>
+
+    <!-- League Card Template -->
+    <template id="league-card-template">
+        <div class="league-card">
+            <img src="" alt="" class="league-logo">
+            <span class="league-name"></span>
+        </div>
+    </template>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html> 

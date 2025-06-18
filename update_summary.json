@@ -1,0 +1,13 @@
+{
+  "language_files_updated": [
+    "lib/translations.ts",
+    "components/language-provider.tsx"
+  ],
+  "files_updated": [
+    "components\\bottom-navigation.tsx",
+    "components\\language-provider.tsx",
+    "components\\live-match-tracker.tsx",
+    "components\\upcoming-match-prediction.tsx",
+    "lib\\translations.ts"
+  ]
+}
