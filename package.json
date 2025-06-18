@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "npx serve@latest out -p $PORT --single --cors",
+    "build": "next build && next export -o out",
+    "start": "npx serve@latest out -p ${PORT:-8080} --single --cors --no-clipboard --no-compression",
     "lint": "next lint",
     "railway:build": "pnpm install --no-frozen-lockfile && next build",
     "railway:start": "npx serve@latest out -p ${PORT:-8080} --single --cors"
